@@ -1,6 +1,6 @@
 # Semantic RAG Engine
 
-`semantic-rag-engine` is a production-minded local Retrieval-Augmented Generation benchmark service built for a senior GenAI assessment. It compares raw vector search against AI-enhanced retrieval, keeps the architecture modular enough to evolve into a managed platform, and produces benchmark artifacts that show whether query expansion improves retrieval quality for realistic engineering questions.
+`semantic-rag-engine` is a production-minded local Retrieval-Augmented Generation benchmark service built for a GenAI. It compares raw vector search against AI-enhanced retrieval, keeps the architecture modular enough to evolve into a managed platform, and produces benchmark artifacts that show whether query expansion improves retrieval quality for realistic engineering questions.
 
 ## What it implements
 
@@ -76,7 +76,6 @@ AWS_S3_KEY=technical_documents.json
 If S3 is unavailable or the object cannot be fetched, the loader falls back to the local dataset automatically.
 
 ## Benchmark behavior
-
 Running `python -m app.main` executes the benchmark suite and prints a strategy-by-strategy comparison for each query. It also writes:
 
 - `benchmark_results/benchmark_results.json`
