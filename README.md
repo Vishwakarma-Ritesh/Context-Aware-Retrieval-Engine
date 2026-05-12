@@ -39,6 +39,13 @@ The ingestion and retrieval layers are reusable across the benchmark runner and 
 
 Cosine similarity is preferred over Euclidean distance for dense text embeddings because the relative direction of the vector usually carries more semantic meaning than the raw magnitude. When two queries point in a similar direction in embedding space, cosine similarity keeps them close even if one vector has a larger norm. Euclidean distance is more sensitive to magnitude shifts and is therefore a weaker default for normalized semantic embeddings.
 
+## Architecture Note
+
+For submission-ready documentation focused on similarity metric selection and the production migration path to Vertex AI Vector Search, see:
+
+- [Semantic RAG Architecture Note (PDF)](docs/semantic-rag-architecture-note.pdf)
+- [Semantic RAG Architecture Note (PPTX)](docs/semantic-rag-architecture-note.pptx)
+
 ## Local setup
 
 ```bash

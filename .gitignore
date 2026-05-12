@@ -23,6 +23,7 @@ htmlcov/
 .terraform/
 *.tfstate
 *.tfstate.backup
+outputs/
 
 .DS_Store
 .coverage
