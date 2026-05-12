@@ -13,3 +13,15 @@ build/
 benchmark_results/*.json
 benchmark_results/*.md
 !.gitkeep
+
+.DS_Store
+.coverage
+.venv/
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+htmlcov/
+.terraform/
+*.tfstate
+*.tfstate.backup
