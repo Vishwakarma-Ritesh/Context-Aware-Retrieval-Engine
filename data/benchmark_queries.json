@@ -1,0 +1,22 @@
+[
+  {
+    "query": "How does the system handle peak load?",
+    "top_k": 3,
+    "relevant_document_ids": ["doc-k8s-hpa", "doc-load-balancing", "doc-traffic-spikes"]
+  },
+  {
+    "query": "What keeps the backend responsive when reads surge?",
+    "top_k": 3,
+    "relevant_document_ids": ["doc-redis-cache", "doc-observability"]
+  },
+  {
+    "query": "How do we avoid outages during service failures?",
+    "top_k": 3,
+    "relevant_document_ids": ["doc-aws-ha", "doc-backend-resilience", "doc-service-mesh"]
+  },
+  {
+    "query": "How are releases kept safe in production?",
+    "top_k": 3,
+    "relevant_document_ids": ["doc-cicd", "doc-observability"]
+  }
+]

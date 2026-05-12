@@ -1,0 +1,15 @@
+.pytest_cache/
+__pycache__/
+.venv/
+.env
+coverage.xml
+htmlcov/
+*.pyc
+*.pyo
+*.pyd
+dist/
+build/
+*.egg-info/
+benchmark_results/*.json
+benchmark_results/*.md
+!.gitkeep

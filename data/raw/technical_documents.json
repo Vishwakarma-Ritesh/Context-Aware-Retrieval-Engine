@@ -1,0 +1,122 @@
+[
+  {
+    "document_id": "doc-k8s-hpa",
+    "title": "Kubernetes Horizontal Pod Autoscaler Under Burst Traffic",
+    "topic": "kubernetes autoscaling",
+    "source": "local",
+    "keywords": ["kubernetes", "autoscaling", "hpa", "cpu", "traffic spikes"],
+    "paragraphs": [
+      "The platform handles burst traffic by running stateless API pods behind a Kubernetes Horizontal Pod Autoscaler. The HPA consumes CPU and custom request-per-second metrics from Prometheus Adapter, scales replicas ahead of saturation, and keeps a minimum warm pool so the cluster does not need to cold-start capacity in the middle of a spike."
+    ]
+  },
+  {
+    "document_id": "doc-load-balancing",
+    "title": "Load Balancing Strategy for North-South Traffic",
+    "topic": "load balancing",
+    "source": "local",
+    "keywords": ["load balancing", "traffic distribution", "gateway", "ingress"],
+    "paragraphs": [
+      "External traffic lands on an application load balancer and is fanned into the cluster through an ingress controller. Session affinity is disabled for general APIs so traffic remains evenly distributed, while connection draining and health probes prevent overloaded or unhealthy pods from receiving more requests during pressure events."
+    ]
+  },
+  {
+    "document_id": "doc-redis-cache",
+    "title": "Redis Read-Through Cache for Latency Control",
+    "topic": "redis caching",
+    "source": "local",
+    "keywords": ["redis", "cache", "latency", "throughput", "read-heavy"],
+    "paragraphs": [
+      "Read-heavy endpoints use a Redis read-through cache keyed by tenant and resource version. Popular objects are served from memory rather than the primary datastore, which reduces tail latency, shields downstream services during traffic surges, and keeps response times predictable when the read amplification factor increases."
+    ]
+  },
+  {
+    "document_id": "doc-distributed-consistency",
+    "title": "Distributed Systems Reliability Patterns",
+    "topic": "distributed systems",
+    "source": "local",
+    "keywords": ["distributed systems", "retries", "idempotency", "queues"],
+    "paragraphs": [
+      "The backend is designed around asynchronous boundaries and idempotent consumers so transient failures do not cascade through the system. Critical workflows emit domain events onto a queue, retries use bounded exponential backoff, and handlers are idempotent so a replay does not duplicate side effects when partitions or partial failures occur."
+    ]
+  },
+  {
+    "document_id": "doc-api-gateway",
+    "title": "API Gateway Controls and Request Shaping",
+    "topic": "api gateways",
+    "source": "local",
+    "keywords": ["api gateway", "routing", "rate limiting", "authentication"],
+    "paragraphs": [
+      "The API gateway enforces authentication, rate limiting, and per-route routing policy before requests reach internal services. This design removes cross-cutting concerns from application handlers and lets the platform absorb noisy-neighbor traffic by throttling abusive clients at the edge rather than inside the service mesh."
+    ]
+  },
+  {
+    "document_id": "doc-aws-ha",
+    "title": "AWS Multi-AZ High Availability Layout",
+    "topic": "aws infrastructure",
+    "source": "local",
+    "keywords": ["aws", "multi-az", "high availability", "rds", "asg"],
+    "paragraphs": [
+      "Production workloads are spread across multiple availability zones with stateless compute in an Auto Scaling Group and data services deployed in managed multi-AZ configurations. If a single zone degrades, traffic is shifted away by the load balancer while replicas in healthy zones continue serving without forcing a full regional failover."
+    ]
+  },
+  {
+    "document_id": "doc-observability",
+    "title": "Observability Signals for Capacity and Failure Detection",
+    "topic": "monitoring systems",
+    "source": "local",
+    "keywords": ["monitoring", "prometheus", "alerts", "slo", "tracing"],
+    "paragraphs": [
+      "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure."
+    ]
+  },
+  {
+    "document_id": "doc-cicd",
+    "title": "CI/CD Pipeline Safety Gates",
+    "topic": "ci/cd pipelines",
+    "source": "local",
+    "keywords": ["ci/cd", "pipeline", "deployment", "rollback", "quality gates"],
+    "paragraphs": [
+      "Each deployment passes through build validation, unit tests, contract checks, and a canary stage before full rollout. The pipeline captures error-budget signals during the canary window and can automatically rollback if latency, error rate, or startup health diverge from the baseline established by the previous stable release."
+    ]
+  },
+  {
+    "document_id": "doc-microservices",
+    "title": "Microservice Boundary Design for Scalable Teams",
+    "topic": "microservices",
+    "source": "local",
+    "keywords": ["microservices", "bounded context", "ownership", "service contracts"],
+    "paragraphs": [
+      "Services are organized around bounded business capabilities rather than database tables. That keeps ownership clear, reduces broad coupling during releases, and allows the platform to scale teams independently while still coordinating through versioned contracts and event schemas."
+    ]
+  },
+  {
+    "document_id": "doc-backend-resilience",
+    "title": "Backend Resilience Through Graceful Degradation",
+    "topic": "backend resilience",
+    "source": "local",
+    "keywords": ["resilience", "degradation", "timeouts", "circuit breaker", "fallback"],
+    "paragraphs": [
+      "When downstream dependencies become slow or unavailable, the service layer applies request timeouts, circuit breakers, and fallback behavior instead of waiting indefinitely. Non-critical features such as recommendations are dropped first so the core transaction path stays available even while the platform is operating in a degraded state."
+    ]
+  },
+  {
+    "document_id": "doc-traffic-spikes",
+    "title": "Traffic Spike Playbook and Warm Capacity Planning",
+    "topic": "traffic spikes",
+    "source": "local",
+    "keywords": ["traffic spikes", "warm capacity", "burst", "autoscaling", "playbook"],
+    "paragraphs": [
+      "The operations playbook assumes that demand spikes arrive faster than infrastructure can always provision from zero. To absorb that shape of load, the platform keeps spare capacity online, pre-scales worker pools ahead of marketing launches, and combines autoscaling with queue buffering so sudden concurrency does not overwhelm synchronous APIs."
+    ]
+  },
+  {
+    "document_id": "doc-service-mesh",
+    "title": "Service Mesh Policies for East-West Reliability",
+    "topic": "high availability architecture",
+    "source": "local",
+    "keywords": ["service mesh", "retries", "mTLS", "east-west traffic", "resilience"],
+    "paragraphs": [
+      "East-west traffic inside the cluster is mediated by a service mesh that standardizes mTLS, retry budgets, and timeout policy. Consistent network behavior at the mesh layer keeps service-to-service communication predictable and prevents a single noisy dependency from causing retry storms across the rest of the platform."
+    ]
+  }
+]
