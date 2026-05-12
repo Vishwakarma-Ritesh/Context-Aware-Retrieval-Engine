@@ -10,8 +10,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-benchmark_results/*.json
-benchmark_results/*.md
 !.gitkeep
 
 .DS_Store

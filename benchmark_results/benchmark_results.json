@@ -1,0 +1,575 @@
+{
+  "queries": [
+    {
+      "original_query": "How does the system handle peak load?",
+      "expanded_query": "How does the system handle peak load? infrastructure autoscaling horizontal pod autoscaler behavior load balancer traffic distribution sudden high demand spikes",
+      "strategy_a": [
+        {
+          "chunk_id": "doc-cicd-chunk-0",
+          "document_id": "doc-cicd",
+          "title": "CI/CD Pipeline Safety Gates",
+          "content": "Each deployment passes through build validation, unit tests, contract checks, and a canary stage before full rollout. The pipeline captures error-budget signals during the canary window and can automatically rollback if latency, error rate, or startup health diverge from the baseline established by the previous stable release.",
+          "score": 0.2744631767272949,
+          "rank": 1,
+          "metadata": {
+            "topic": "ci/cd pipelines",
+            "keywords": [
+              "ci/cd",
+              "pipeline",
+              "deployment",
+              "rollback",
+              "quality gates"
+            ],
+            "document_id": "doc-cicd"
+          }
+        },
+        {
+          "chunk_id": "doc-k8s-hpa-chunk-0",
+          "document_id": "doc-k8s-hpa",
+          "title": "Kubernetes Horizontal Pod Autoscaler Under Burst Traffic",
+          "content": "The platform handles burst traffic by running stateless API pods behind a Kubernetes Horizontal Pod Autoscaler. The HPA consumes CPU and custom request-per-second metrics from Prometheus Adapter, scales replicas ahead of saturation, and keeps a minimum warm pool so the cluster does not need to cold-start capacity in the middle of a spike.",
+          "score": 0.19296516478061676,
+          "rank": 2,
+          "metadata": {
+            "topic": "kubernetes autoscaling",
+            "keywords": [
+              "kubernetes",
+              "autoscaling",
+              "hpa",
+              "cpu",
+              "traffic spikes"
+            ],
+            "document_id": "doc-k8s-hpa"
+          }
+        },
+        {
+          "chunk_id": "doc-service-mesh-chunk-0",
+          "document_id": "doc-service-mesh",
+          "title": "Service Mesh Policies for East-West Reliability",
+          "content": "East-west traffic inside the cluster is mediated by a service mesh that standardizes mTLS, retry budgets, and timeout policy. Consistent network behavior at the mesh layer keeps service-to-service communication predictable and prevents a single noisy dependency from causing retry storms across the rest of the platform.",
+          "score": 0.1851142942905426,
+          "rank": 3,
+          "metadata": {
+            "topic": "high availability architecture",
+            "keywords": [
+              "service mesh",
+              "retries",
+              "mTLS",
+              "east-west traffic",
+              "resilience"
+            ],
+            "document_id": "doc-service-mesh"
+          }
+        }
+      ],
+      "strategy_b": [
+        {
+          "chunk_id": "doc-traffic-spikes-chunk-0",
+          "document_id": "doc-traffic-spikes",
+          "title": "Traffic Spike Playbook and Warm Capacity Planning",
+          "content": "The operations playbook assumes that demand spikes arrive faster than infrastructure can always provision from zero. To absorb that shape of load, the platform keeps spare capacity online, pre-scales worker pools ahead of marketing launches, and combines autoscaling with queue buffering so sudden concurrency does not overwhelm synchronous APIs.",
+          "score": 0.2673656940460205,
+          "rank": 1,
+          "metadata": {
+            "topic": "traffic spikes",
+            "keywords": [
+              "traffic spikes",
+              "warm capacity",
+              "burst",
+              "autoscaling",
+              "playbook"
+            ],
+            "document_id": "doc-traffic-spikes"
+          }
+        },
+        {
+          "chunk_id": "doc-load-balancing-chunk-0",
+          "document_id": "doc-load-balancing",
+          "title": "Load Balancing Strategy for North-South Traffic",
+          "content": "External traffic lands on an application load balancer and is fanned into the cluster through an ingress controller. Session affinity is disabled for general APIs so traffic remains evenly distributed, while connection draining and health probes prevent overloaded or unhealthy pods from receiving more requests during pressure events.",
+          "score": 0.24780938029289246,
+          "rank": 2,
+          "metadata": {
+            "topic": "load balancing",
+            "keywords": [
+              "load balancing",
+              "traffic distribution",
+              "gateway",
+              "ingress"
+            ],
+            "document_id": "doc-load-balancing"
+          }
+        },
+        {
+          "chunk_id": "doc-k8s-hpa-chunk-0",
+          "document_id": "doc-k8s-hpa",
+          "title": "Kubernetes Horizontal Pod Autoscaler Under Burst Traffic",
+          "content": "The platform handles burst traffic by running stateless API pods behind a Kubernetes Horizontal Pod Autoscaler. The HPA consumes CPU and custom request-per-second metrics from Prometheus Adapter, scales replicas ahead of saturation, and keeps a minimum warm pool so the cluster does not need to cold-start capacity in the middle of a spike.",
+          "score": 0.23163354396820068,
+          "rank": 3,
+          "metadata": {
+            "topic": "kubernetes autoscaling",
+            "keywords": [
+              "kubernetes",
+              "autoscaling",
+              "hpa",
+              "cpu",
+              "traffic spikes"
+            ],
+            "document_id": "doc-k8s-hpa"
+          }
+        }
+      ],
+      "observations": [
+        "Top-ranked document changed from ['doc-cicd'] to ['doc-traffic-spikes'] after expansion.",
+        "Expanded retrieval surfaced additional relevant context from doc-traffic-spikes, doc-load-balancing."
+      ],
+      "expansion_reasoning": [
+        "Expanded a capacity-oriented query toward autoscaling and traffic management signals."
+      ],
+      "evaluation": {
+        "strategy_a": {
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.5,
+          "hit_count": 1
+        },
+        "strategy_b": {
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "hit_count": 3
+        }
+      }
+    },
+    {
+      "original_query": "What keeps the backend responsive when reads surge?",
+      "expanded_query": "What keeps the backend responsive when reads surge? redis caching strategy read-through cache cache hit ratio read-heavy workload optimization latency reduction under repeated requests infrastructure autoscaling horizontal pod autoscaler behavior load balancer traffic distribution sudden high demand spikes",
+      "strategy_a": [
+        {
+          "chunk_id": "doc-backend-resilience-chunk-0",
+          "document_id": "doc-backend-resilience",
+          "title": "Backend Resilience Through Graceful Degradation",
+          "content": "When downstream dependencies become slow or unavailable, the service layer applies request timeouts, circuit breakers, and fallback behavior instead of waiting indefinitely. Non-critical features such as recommendations are dropped first so the core transaction path stays available even while the platform is operating in a degraded state.",
+          "score": 0.19813260436058044,
+          "rank": 1,
+          "metadata": {
+            "topic": "backend resilience",
+            "keywords": [
+              "resilience",
+              "degradation",
+              "timeouts",
+              "circuit breaker",
+              "fallback"
+            ],
+            "document_id": "doc-backend-resilience"
+          }
+        },
+        {
+          "chunk_id": "doc-redis-cache-chunk-0",
+          "document_id": "doc-redis-cache",
+          "title": "Redis Read-Through Cache for Latency Control",
+          "content": "Read-heavy endpoints use a Redis read-through cache keyed by tenant and resource version. Popular objects are served from memory rather than the primary datastore, which reduces tail latency, shields downstream services during traffic surges, and keeps response times predictable when the read amplification factor increases.",
+          "score": 0.18253880739212036,
+          "rank": 2,
+          "metadata": {
+            "topic": "redis caching",
+            "keywords": [
+              "redis",
+              "cache",
+              "latency",
+              "throughput",
+              "read-heavy"
+            ],
+            "document_id": "doc-redis-cache"
+          }
+        },
+        {
+          "chunk_id": "doc-api-gateway-chunk-0",
+          "document_id": "doc-api-gateway",
+          "title": "API Gateway Controls and Request Shaping",
+          "content": "The API gateway enforces authentication, rate limiting, and per-route routing policy before requests reach internal services. This design removes cross-cutting concerns from application handlers and lets the platform absorb noisy-neighbor traffic by throttling abusive clients at the edge rather than inside the service mesh.",
+          "score": 0.17578206956386566,
+          "rank": 3,
+          "metadata": {
+            "topic": "api gateways",
+            "keywords": [
+              "api gateway",
+              "routing",
+              "rate limiting",
+              "authentication"
+            ],
+            "document_id": "doc-api-gateway"
+          }
+        }
+      ],
+      "strategy_b": [
+        {
+          "chunk_id": "doc-redis-cache-chunk-0",
+          "document_id": "doc-redis-cache",
+          "title": "Redis Read-Through Cache for Latency Control",
+          "content": "Read-heavy endpoints use a Redis read-through cache keyed by tenant and resource version. Popular objects are served from memory rather than the primary datastore, which reduces tail latency, shields downstream services during traffic surges, and keeps response times predictable when the read amplification factor increases.",
+          "score": 0.2546405494213104,
+          "rank": 1,
+          "metadata": {
+            "topic": "redis caching",
+            "keywords": [
+              "redis",
+              "cache",
+              "latency",
+              "throughput",
+              "read-heavy"
+            ],
+            "document_id": "doc-redis-cache"
+          }
+        },
+        {
+          "chunk_id": "doc-observability-chunk-0",
+          "document_id": "doc-observability",
+          "title": "Observability Signals for Capacity and Failure Detection",
+          "content": "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure.",
+          "score": 0.1545691043138504,
+          "rank": 2,
+          "metadata": {
+            "topic": "monitoring systems",
+            "keywords": [
+              "monitoring",
+              "prometheus",
+              "alerts",
+              "slo",
+              "tracing"
+            ],
+            "document_id": "doc-observability"
+          }
+        },
+        {
+          "chunk_id": "doc-traffic-spikes-chunk-0",
+          "document_id": "doc-traffic-spikes",
+          "title": "Traffic Spike Playbook and Warm Capacity Planning",
+          "content": "The operations playbook assumes that demand spikes arrive faster than infrastructure can always provision from zero. To absorb that shape of load, the platform keeps spare capacity online, pre-scales worker pools ahead of marketing launches, and combines autoscaling with queue buffering so sudden concurrency does not overwhelm synchronous APIs.",
+          "score": 0.15090858936309814,
+          "rank": 3,
+          "metadata": {
+            "topic": "traffic spikes",
+            "keywords": [
+              "traffic spikes",
+              "warm capacity",
+              "burst",
+              "autoscaling",
+              "playbook"
+            ],
+            "document_id": "doc-traffic-spikes"
+          }
+        }
+      ],
+      "observations": [
+        "Top-ranked document changed from ['doc-backend-resilience'] to ['doc-redis-cache'] after expansion.",
+        "Expanded retrieval achieved a stronger top-1 similarity score.",
+        "Expanded retrieval surfaced additional relevant context from doc-observability, doc-traffic-spikes."
+      ],
+      "expansion_reasoning": [
+        "Expanded a performance query toward cache effectiveness and request reuse.",
+        "Expanded a capacity-oriented query toward autoscaling and traffic management signals."
+      ],
+      "evaluation": {
+        "strategy_a": {
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.5,
+          "hit_count": 1
+        },
+        "strategy_b": {
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "hit_count": 2
+        }
+      }
+    },
+    {
+      "original_query": "How do we avoid outages during service failures?",
+      "expanded_query": "How do we avoid outages during service failures? high availability architecture graceful degradation multi-az failover circuit breaker and retry behavior",
+      "strategy_a": [
+        {
+          "chunk_id": "doc-observability-chunk-0",
+          "document_id": "doc-observability",
+          "title": "Observability Signals for Capacity and Failure Detection",
+          "content": "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure.",
+          "score": 0.12501056492328644,
+          "rank": 1,
+          "metadata": {
+            "topic": "monitoring systems",
+            "keywords": [
+              "monitoring",
+              "prometheus",
+              "alerts",
+              "slo",
+              "tracing"
+            ],
+            "document_id": "doc-observability"
+          }
+        },
+        {
+          "chunk_id": "doc-microservices-chunk-0",
+          "document_id": "doc-microservices",
+          "title": "Microservice Boundary Design for Scalable Teams",
+          "content": "Services are organized around bounded business capabilities rather than database tables. That keeps ownership clear, reduces broad coupling during releases, and allows the platform to scale teams independently while still coordinating through versioned contracts and event schemas.",
+          "score": 0.1197308823466301,
+          "rank": 2,
+          "metadata": {
+            "topic": "microservices",
+            "keywords": [
+              "microservices",
+              "bounded context",
+              "ownership",
+              "service contracts"
+            ],
+            "document_id": "doc-microservices"
+          }
+        },
+        {
+          "chunk_id": "doc-service-mesh-chunk-0",
+          "document_id": "doc-service-mesh",
+          "title": "Service Mesh Policies for East-West Reliability",
+          "content": "East-west traffic inside the cluster is mediated by a service mesh that standardizes mTLS, retry budgets, and timeout policy. Consistent network behavior at the mesh layer keeps service-to-service communication predictable and prevents a single noisy dependency from causing retry storms across the rest of the platform.",
+          "score": 0.10929475724697113,
+          "rank": 3,
+          "metadata": {
+            "topic": "high availability architecture",
+            "keywords": [
+              "service mesh",
+              "retries",
+              "mTLS",
+              "east-west traffic",
+              "resilience"
+            ],
+            "document_id": "doc-service-mesh"
+          }
+        }
+      ],
+      "strategy_b": [
+        {
+          "chunk_id": "doc-service-mesh-chunk-0",
+          "document_id": "doc-service-mesh",
+          "title": "Service Mesh Policies for East-West Reliability",
+          "content": "East-west traffic inside the cluster is mediated by a service mesh that standardizes mTLS, retry budgets, and timeout policy. Consistent network behavior at the mesh layer keeps service-to-service communication predictable and prevents a single noisy dependency from causing retry storms across the rest of the platform.",
+          "score": 0.21688343584537506,
+          "rank": 1,
+          "metadata": {
+            "topic": "high availability architecture",
+            "keywords": [
+              "service mesh",
+              "retries",
+              "mTLS",
+              "east-west traffic",
+              "resilience"
+            ],
+            "document_id": "doc-service-mesh"
+          }
+        },
+        {
+          "chunk_id": "doc-observability-chunk-0",
+          "document_id": "doc-observability",
+          "title": "Observability Signals for Capacity and Failure Detection",
+          "content": "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure.",
+          "score": 0.21339216828346252,
+          "rank": 2,
+          "metadata": {
+            "topic": "monitoring systems",
+            "keywords": [
+              "monitoring",
+              "prometheus",
+              "alerts",
+              "slo",
+              "tracing"
+            ],
+            "document_id": "doc-observability"
+          }
+        },
+        {
+          "chunk_id": "doc-microservices-chunk-0",
+          "document_id": "doc-microservices",
+          "title": "Microservice Boundary Design for Scalable Teams",
+          "content": "Services are organized around bounded business capabilities rather than database tables. That keeps ownership clear, reduces broad coupling during releases, and allows the platform to scale teams independently while still coordinating through versioned contracts and event schemas.",
+          "score": 0.20075246691703796,
+          "rank": 3,
+          "metadata": {
+            "topic": "microservices",
+            "keywords": [
+              "microservices",
+              "bounded context",
+              "ownership",
+              "service contracts"
+            ],
+            "document_id": "doc-microservices"
+          }
+        }
+      ],
+      "observations": [
+        "Top-ranked document changed from ['doc-observability'] to ['doc-service-mesh'] after expansion.",
+        "Expanded retrieval achieved a stronger top-1 similarity score."
+      ],
+      "expansion_reasoning": [
+        "Expanded a resilience query toward availability and failure recovery mechanisms."
+      ],
+      "evaluation": {
+        "strategy_a": {
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 0.3333333333333333,
+          "hit_count": 1
+        },
+        "strategy_b": {
+          "recall_at_k": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "hit_count": 1
+        }
+      }
+    },
+    {
+      "original_query": "How are releases kept safe in production?",
+      "expanded_query": "How are releases kept safe in production? ci/cd pipeline gates progressive deployment rollout canary analysis automated rollback safeguards service health verification",
+      "strategy_a": [
+        {
+          "chunk_id": "doc-aws-ha-chunk-0",
+          "document_id": "doc-aws-ha",
+          "title": "AWS Multi-AZ High Availability Layout",
+          "content": "Production workloads are spread across multiple availability zones with stateless compute in an Auto Scaling Group and data services deployed in managed multi-AZ configurations. If a single zone degrades, traffic is shifted away by the load balancer while replicas in healthy zones continue serving without forcing a full regional failover.",
+          "score": 0.24699360132217407,
+          "rank": 1,
+          "metadata": {
+            "topic": "aws infrastructure",
+            "keywords": [
+              "aws",
+              "multi-az",
+              "high availability",
+              "rds",
+              "asg"
+            ],
+            "document_id": "doc-aws-ha"
+          }
+        },
+        {
+          "chunk_id": "doc-service-mesh-chunk-0",
+          "document_id": "doc-service-mesh",
+          "title": "Service Mesh Policies for East-West Reliability",
+          "content": "East-west traffic inside the cluster is mediated by a service mesh that standardizes mTLS, retry budgets, and timeout policy. Consistent network behavior at the mesh layer keeps service-to-service communication predictable and prevents a single noisy dependency from causing retry storms across the rest of the platform.",
+          "score": 0.07411380857229233,
+          "rank": 2,
+          "metadata": {
+            "topic": "high availability architecture",
+            "keywords": [
+              "service mesh",
+              "retries",
+              "mTLS",
+              "east-west traffic",
+              "resilience"
+            ],
+            "document_id": "doc-service-mesh"
+          }
+        },
+        {
+          "chunk_id": "doc-observability-chunk-0",
+          "document_id": "doc-observability",
+          "title": "Observability Signals for Capacity and Failure Detection",
+          "content": "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure.",
+          "score": 0.052691780030727386,
+          "rank": 3,
+          "metadata": {
+            "topic": "monitoring systems",
+            "keywords": [
+              "monitoring",
+              "prometheus",
+              "alerts",
+              "slo",
+              "tracing"
+            ],
+            "document_id": "doc-observability"
+          }
+        }
+      ],
+      "strategy_b": [
+        {
+          "chunk_id": "doc-aws-ha-chunk-0",
+          "document_id": "doc-aws-ha",
+          "title": "AWS Multi-AZ High Availability Layout",
+          "content": "Production workloads are spread across multiple availability zones with stateless compute in an Auto Scaling Group and data services deployed in managed multi-AZ configurations. If a single zone degrades, traffic is shifted away by the load balancer while replicas in healthy zones continue serving without forcing a full regional failover.",
+          "score": 0.20681706070899963,
+          "rank": 1,
+          "metadata": {
+            "topic": "aws infrastructure",
+            "keywords": [
+              "aws",
+              "multi-az",
+              "high availability",
+              "rds",
+              "asg"
+            ],
+            "document_id": "doc-aws-ha"
+          }
+        },
+        {
+          "chunk_id": "doc-cicd-chunk-0",
+          "document_id": "doc-cicd",
+          "title": "CI/CD Pipeline Safety Gates",
+          "content": "Each deployment passes through build validation, unit tests, contract checks, and a canary stage before full rollout. The pipeline captures error-budget signals during the canary window and can automatically rollback if latency, error rate, or startup health diverge from the baseline established by the previous stable release.",
+          "score": 0.15649744868278503,
+          "rank": 2,
+          "metadata": {
+            "topic": "ci/cd pipelines",
+            "keywords": [
+              "ci/cd",
+              "pipeline",
+              "deployment",
+              "rollback",
+              "quality gates"
+            ],
+            "document_id": "doc-cicd"
+          }
+        },
+        {
+          "chunk_id": "doc-observability-chunk-0",
+          "document_id": "doc-observability",
+          "title": "Observability Signals for Capacity and Failure Detection",
+          "content": "Prometheus metrics, distributed traces, and structured application logs feed the operational dashboard used by the platform team. Alerting is based on service-level objectives, queue lag, and saturation indicators so engineers can tell the difference between a brief demand spike, a cache regression, and an actual service failure.",
+          "score": 0.11758150905370712,
+          "rank": 3,
+          "metadata": {
+            "topic": "monitoring systems",
+            "keywords": [
+              "monitoring",
+              "prometheus",
+              "alerts",
+              "slo",
+              "tracing"
+            ],
+            "document_id": "doc-observability"
+          }
+        }
+      ],
+      "observations": [
+        "Expanded retrieval surfaced additional relevant context from doc-cicd."
+      ],
+      "expansion_reasoning": [
+        "Expanded a delivery query toward operational release controls."
+      ],
+      "evaluation": {
+        "strategy_a": {
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.3333333333333333,
+          "hit_count": 1
+        },
+        "strategy_b": {
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "hit_count": 2
+        }
+      }
+    }
+  ],
+  "summary": {
+    "strategy_a": {
+      "avg_recall_at_k": 0.417,
+      "avg_mrr": 0.417
+    },
+    "strategy_b": {
+      "avg_recall_at_k": 0.833,
+      "avg_mrr": 0.875
+    }
+  }
+}
